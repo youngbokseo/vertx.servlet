@@ -1,3 +1,3 @@
 # Readme.md
 
-- test 진행 중
+- Spring boot 기반으로 Vertx Servlet 구현하기
