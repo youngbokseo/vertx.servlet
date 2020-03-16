@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<conversionRule conversionWord="clr"
+		converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{HH:mm:ss} %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>${log.level:-INFO}</level>
+		</filter>
+		<file>${log.path:-./logs}/ncep.log</file>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path:-./logs}/ncep.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>${log.max.history:-14}</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>
+				%d{HH:mm:ss} %-5level %logger{36} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="FILE2"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>${log.level:-INFO}</level>
+		</filter>
+		<file>${log.path:-./logs}/ncep_result.log</file>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path:-./logs}/ncep_result.log.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>${log.max.history:-14}</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>
+				%d{HH:mm:ss} %-5level %logger{36} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.springframework" level="${log.level:-INFO}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="com.ntels.cep" level="${log.level:-INFO}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="com.ntels.cep.engine.service.CallBackService" level="${log.level:-INFO}"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE2" />
+	</logger>
+
+	<logger name="jdbc" level="OFF"/>
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+
+	<logger name="jdbc.sqltiming" level="${log.level:-DEBUG}" 
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</logger>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+
+	<root level="${log.level:-INFO}">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
