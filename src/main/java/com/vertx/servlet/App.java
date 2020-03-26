@@ -1,12 +1,6 @@
-package com.ntels.cep;
+package com.vertx.servlet;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.swing.JOptionPane;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,8 +11,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import com.ntels.cep.common.test.CommonQueue;
-import com.ntels.cep.common.test.MonitorServer;
 
 
 /**
@@ -35,9 +27,6 @@ public class App {
 		
 		
 		SpringApplication.run(App.class, args);
-		ExecutorService executorService = Executors.newFixedThreadPool(1);
-        MonitorServer ms = new MonitorServer(new CommonQueue());
-		executorService.execute(ms);
 	}
 
 	@Bean

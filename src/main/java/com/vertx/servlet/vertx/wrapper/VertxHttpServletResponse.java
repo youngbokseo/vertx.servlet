@@ -1,4 +1,4 @@
-package com.ntels.cep.vertx.wrapper;
+package com.vertx.servlet.vertx.wrapper;
 
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -11,7 +11,7 @@ import javax.servlet.WriteListener;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ntels.cep.vertx.Config;
+import com.vertx.servlet.vertx.Config;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.ntels.cep.vertx;
+package com.vertx.servlet.vertx;
 
 import java.util.Map;
 
@@ -14,11 +14,8 @@ import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;
 
-import com.ntels.cep.common.exception.HttpException;
-import com.ntels.cep.common.exception.ResourceNotFoundException;
-import com.ntels.cep.engine.controller.SendEventController;
-import com.ntels.cep.vertx.wrapper.VertxHttpServletRequest;
-import com.ntels.cep.vertx.wrapper.VertxHttpServletResponse;
+import com.vertx.servlet.vertx.wrapper.VertxHttpServletRequest;
+import com.vertx.servlet.vertx.wrapper.VertxHttpServletResponse;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
@@ -42,8 +39,6 @@ public class VertxServlet extends AbstractVerticle{
     @Autowired
 	private HandlerMapping handlerMapping;
     
-    @Autowired
-    private SendEventController sendEventController;
     
 
 	@PostConstruct
@@ -61,10 +56,8 @@ public class VertxServlet extends AbstractVerticle{
 		router.route().handler(BodyHandler.create());
 		
 		 router.route("/send/event").handler(routingContext -> { // http request receive
-//			 System.out.println("### 2: "+routingContext.getBodyAsString());
 	         try {
-//	            sendEventController.event(rule);
-	        	 sendEventController.asyncevent(routingContext.getBodyAsJson());
+	        	 //vertx route로 직접 handle 하는 법
 	            routingContext.response().end();
 	         }catch(Exception e) {
 	            e.printStackTrace();
@@ -98,13 +91,14 @@ public class VertxServlet extends AbstractVerticle{
     public void doService(HttpServletRequest request, HttpServletResponse response) {
     	try {
 			HandlerExecutionChain chain = handlerMapping.getHandler(request);				
-			if(chain == null) throw new ResourceNotFoundException(request.getRequestURI());
+			if(chain == null) throw new Exception(request.getRequestURI());
 			handlerAdapter.handle(request, response, chain.getHandler());
 		} catch (Exception e) {
 			//e.printStackTrace();
-			if(e instanceof HttpException) {
-				response.setStatus(((HttpException)e).getErrorCode());
-			} 
+			if(e instanceof Exception) {
+				e.getStackTrace();
+			}
+			
 			response.setHeader("RSM", e.getMessage());
 		}
     }

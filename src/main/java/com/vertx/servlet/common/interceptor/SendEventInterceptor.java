@@ -1,4 +1,4 @@
-package com.ntels.cep.common.interceptor;
+package com.vertx.servlet.common.interceptor;
 
 import java.util.Collections;
 import java.util.HashMap;

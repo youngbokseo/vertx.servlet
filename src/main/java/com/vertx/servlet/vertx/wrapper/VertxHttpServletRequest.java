@@ -1,4 +1,4 @@
-package com.ntels.cep.vertx.wrapper;
+package com.vertx.servlet.vertx.wrapper;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -37,7 +37,7 @@ import javax.servlet.http.HttpSessionContext;
 import javax.servlet.http.HttpUpgradeHandler;
 import javax.servlet.http.Part;
 
-import com.ntels.cep.vertx.Config;
+import com.vertx.servlet.vertx.Config;
 
 import io.netty.handler.codec.http.HttpHeaders;
 import io.vertx.core.net.SocketAddress;

@@ -1,4 +1,4 @@
-package com.ntels.cep.vertx;
+package com.vertx.servlet.vertx;
 
 
 public class Config {
